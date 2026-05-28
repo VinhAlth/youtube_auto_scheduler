@@ -1,0 +1,20 @@
+[Unit]
+Description=YouTube Auto Scheduler
+Documentation=file:/opt/youtube-auto-scheduler/RUN.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/youtube-auto-scheduler/backend
+ExecStart=/usr/bin/env npm start
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=PORT=3001
+Environment=DATA_DIR=/opt/youtube-auto-scheduler/backend/data
+Environment=FRONTEND_DIST=/opt/youtube-auto-scheduler/frontend/dist
+Environment=MAX_UPLOAD_SIZE_MB=10240
+
+[Install]
+WantedBy=multi-user.target
